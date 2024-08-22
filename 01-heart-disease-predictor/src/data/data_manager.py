@@ -20,6 +20,17 @@ class DataManager:
         self.s3_utils = s3_utils
         self.preprocessor = None
 
+    def load_data(self):
+        # Load your data here
+        data_path = os.path.join(self.config.PATHS['data_dir'], self.config.DATA['filename'])
+        df = pd.read_csv(data_path)
+        
+        # Assuming the target variable is the last column
+        X = df.iloc[:, :-1]
+        y = df.iloc[:, -1]
+        
+        return X, y
+
     def load_and_preprocess_data(self):
         # Load your data here
         X, y = self.load_data()

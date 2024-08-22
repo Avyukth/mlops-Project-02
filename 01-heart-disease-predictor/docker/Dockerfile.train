@@ -17,7 +17,7 @@ COPY main.py .
 COPY .env .env
 COPY config.toml config.toml
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Create all necessary directories
 RUN mkdir -p /data /app/mlruns /app/models /app/evidently_reports && \
