@@ -4,6 +4,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import pandas as pd
 import numpy as np
+import joblib
 
 class FeaturePreprocessor(BaseEstimator, TransformerMixin):
     def __init__(self):
@@ -32,9 +33,8 @@ class FeaturePreprocessor(BaseEstimator, TransformerMixin):
     def get_feature_names_out(self):
         return self.preprocessor.get_feature_names_out()
 
-    def fit_transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        self.fit(X)
-        return self.transform(X)
+    def fit_transform(self, X, y=None):
+        return self.fit(X, y).transform(X)
 
     def save(self, filepath: str):
         joblib.dump(self, filepath)

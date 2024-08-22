@@ -25,10 +25,6 @@ mlflow_utils = MLflowUtils(config)
 
 
 def run_experiment():
-    # print(f"Model directory: {config.MODEL['dir']}")
-    # print(f"Model version: {config.MODEL['version']}")
-    # print(f"Data version: {config.DATA['version']}")
-
     with mlflow_utils.start_run():
         # Data preparation
         data_manager = DataManager(config, s3_utils)
@@ -68,10 +64,11 @@ def run_experiment():
             models, x_train, y_train, x_test, y_test
         )
 
-        # Log model results
+        # Log model results and save models
         for name, result in results.items():
             mlflow_utils.log_metric(f"{name}_train_score", result["train_score"])
             mlflow_utils.log_metric(f"{name}_test_score", result["test_score"])
+            
             # Convert and log the model in ONNX format
             initial_type = [("float_input", FloatTensorType([None, X.shape[1]]))]
             onx = convert_sklearn(models[name], initial_types=initial_type)
@@ -93,7 +90,6 @@ def run_experiment():
         # Set tags for the run
         mlflow_utils.set_tag("model_version", config.VERSIONS["model"])
         mlflow_utils.set_tag("data_version", config.VERSIONS["data"])
-
 
 def main():
     print("Starting Heart Disease Classification project...")

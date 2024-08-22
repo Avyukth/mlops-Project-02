@@ -1,16 +1,15 @@
 import os
 import logging
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
-from src.data.data_loader import DataLoader
-from src.data.data_preprocessor import DataPreprocessor
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from src.data.feature_preprocessor import FeaturePreprocessor
 import joblib
 from skl2onnx import convert_sklearn
 from skl2onnx.common.data_types import FloatTensorType
 import onnx
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from src.data.feature_preprocessor import FeaturePreprocessor
 
 logger = logging.getLogger(__name__)
 
@@ -19,63 +18,58 @@ class DataManager:
         self.config = config
         self.s3_utils = s3_utils
         self.preprocessor = None
+        self.feature_names = None
 
     def load_data(self):
-        # Load your data here
-        data_path = os.path.join(self.config.PATHS['data_dir'], self.config.DATA['filename'])
+        data_path = self.config.paths['data_dir']
         df = pd.read_csv(data_path)
         
-        # Assuming the target variable is the last column
         X = df.iloc[:, :-1]
         y = df.iloc[:, -1]
         
         return X, y
 
     def load_and_preprocess_data(self):
-        # Load your data here
         X, y = self.load_data()
 
-        # Create and fit the preprocessing pipeline
         self.preprocessor = Pipeline([
             ('feature_preprocessor', FeaturePreprocessor()),
             ('scaler', StandardScaler())
         ])
 
-        X_processed = self.preprocessor.fit_transform(X)
+        X_processed = self.preprocessor.fit_transform(X, y)
 
-        # Get the column names after preprocessing
-        feature_names = self.preprocessor.named_steps['feature_preprocessor'].get_feature_names_out()
+        self.feature_names = self.preprocessor.named_steps['feature_preprocessor'].get_feature_names_out()
 
-        return X_processed, y, feature_names
+        # Convert X_processed back to a DataFrame
+        X_processed_df = pd.DataFrame(X_processed, columns=self.feature_names, index=X.index)
+
+        cat_cols = X.select_dtypes(include=['object', 'category']).columns.tolist()
+        num_cols = X.select_dtypes(include=['int64', 'float64']).columns.tolist()
+
+        return X_processed_df, y, cat_cols, num_cols
 
     def save_preprocessors(self, X):
-        from skl2onnx import convert_sklearn
-        from skl2onnx.common.data_types import FloatTensorType
-        import onnx
-
-        preprocessor_path = os.path.join(self.config.PATHS['model_dir'], "preprocessor.onnx")
+        preprocessor_path = os.path.join(self.config.paths['model_dir'], "preprocessor.onnx")
         
         initial_type = [('float_input', FloatTensorType([None, X.shape[1]]))]
         onx = convert_sklearn(self.preprocessor, initial_types=initial_type)
         onnx.save_model(onx, preprocessor_path)
 
+        logger.info(f"Preprocessor saved to {preprocessor_path}")
+
     def split_data(self, X, y):
         return train_test_split(
             X, y, 
-            test_size=self.config.TRAIN_TEST_SPLIT['test_size'], 
-            random_state=self.config.TRAIN_TEST_SPLIT['random_state']
+            test_size=self.config.train_test_split['test_size'], 
+            random_state=self.config.train_test_split['random_state']
         )
 
     def load_preprocessors(self):
-        feature_preprocessor_path = os.path.join(self.config.MODEL_DIR, "feature_preprocessor.pkl")
-        target_preprocessor_path = os.path.join(self.config.MODEL_DIR, "target_preprocessor.pkl")
+        preprocessor_path = os.path.join(self.config.paths['model_dir'], "preprocessor.onnx")
         
-        # Download preprocessors from S3
-        self.s3_utils.download_file("feature_preprocessor.pkl", feature_preprocessor_path)
-        self.s3_utils.download_file("target_preprocessor.pkl", target_preprocessor_path)
+        self.s3_utils.download_file("preprocessor.onnx", preprocessor_path)
         
-        with open(feature_preprocessor_path, 'rb') as f:
-            self.preprocessor.feature_preprocessor = cloudpickle.load(f)
-        with open(target_preprocessor_path, 'rb') as f:
-            self.preprocessor.target_preprocessor = cloudpickle.load(f)
-        logger.info("Preprocessors loaded from S3 successfully")
+        self.preprocessor = onnx.load(preprocessor_path)
+        
+        logger.info("Preprocessor loaded from S3 successfully")
