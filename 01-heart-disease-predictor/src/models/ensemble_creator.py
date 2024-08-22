@@ -3,6 +3,7 @@ import pandas as pd
 from .base_model import BaseModel
 from sklearn.ensemble import VotingClassifier, StackingClassifier
 import pickle
+import numpy as np
 
 class EnsembleCreator:
     def __init__(self, config):
