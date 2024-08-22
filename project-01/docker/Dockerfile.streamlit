@@ -1,0 +1,37 @@
+FROM continuumio/miniconda3:latest
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy only the necessary files for Streamlit
+COPY streamlit/requirements.txt requirements.txt
+COPY config/ config/
+COPY streamlit/ streamlit/
+
+# Create a new conda environment and install dependencies
+RUN conda create -n streamlit_env python=3.12 -y && \
+    conda run -n streamlit_env conda install -y \
+    pandas \
+    pillow \
+    streamlit \
+    requests && \
+    conda clean -afy
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV PATH=/opt/conda/envs/streamlit_env/bin:$PATH
+
+# Expose the port Streamlit runs on
+EXPOSE 8501
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8501/healthz || exit 1
+
+# Run the Streamlit app
+CMD ["conda", "run", "--no-capture-output", "-n", "streamlit_env", "streamlit", "run", "streamlit/app.py", "--server.port=8501", "--server.address=0.0.0.0"]

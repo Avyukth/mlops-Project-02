@@ -1,0 +1,16 @@
+joblib
+matplotlib
+mlflow
+numpy
+pandas
+seaborn
+catboost
+lightgbm
+mlxtend
+scikit-learn
+xgboost
+boto3
+evidently
+cloudpickle
+skl2onnx
+onnxruntime

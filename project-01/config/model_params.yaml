@@ -1,0 +1,50 @@
+logistic_regression:
+  C: 1.0
+  penalty: 'l2'
+  solver: 'liblinear'
+  max_iter: 1000
+
+svm:
+  C: 1.0
+  kernel: 'rbf'
+  probability: true
+
+knn:
+  n_neighbors: 5
+  weights: 'uniform'
+
+mlp:
+  hidden_layer_sizes: [100, 50]
+  activation: 'relu'
+  solver: 'adam'
+  max_iter: 1000
+
+random_forest:
+  n_estimators: 100
+  max_depth: null
+  min_samples_split: 2
+  min_samples_leaf: 1
+
+extra_trees:
+  n_estimators: 100
+  max_depth: null
+  min_samples_split: 2
+  min_samples_leaf: 1
+
+catboost:
+  iterations: 100
+  depth: 6
+  learning_rate: 0.1
+  loss_function: 'Logloss'
+
+lgbm:
+  num_leaves: 31
+  max_depth: -1
+  learning_rate: 0.1
+  n_estimators: 100
+
+xgboost:
+  max_depth: 6
+  learning_rate: 0.1
+  n_estimators: 100
+  objective: 'binary:logistic'

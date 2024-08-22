@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: train
+  namespace: heart-disease-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: train
+          image: localhost/heart-disease-train:latest
+          env:
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: heart-disease-config
+                  key: s3-bucket-name
+            - name: S3_ENDPOINT_URL
+              value: http://minio:9000
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: secret-access-key
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: heart-disease-config
+                  key: s3-region-name
+            - name: MLFLOW_TRACKING_URI
+              value: http://mlflow:6060
+            - name: S3_REPORT_PREFIX
+              value: evidently_reports
+          volumeMounts:
+            - name: models
+              mountPath: /app/models
+            - name: mlflow-data
+              mountPath: /data
+            - name: mlflow-artifacts
+              mountPath: /app/mlruns
+            - name: config
+              mountPath: /app/config.toml
+              subPath: config.toml
+      restartPolicy: OnFailure
+      volumes:
+        - name: models
+          emptyDir: {}
+        - name: mlflow-data
+          persistentVolumeClaim:
+            claimName: mlflow-data-pvc
+        - name: mlflow-artifacts
+          persistentVolumeClaim:
+            claimName: mlflow-artifacts-pvc
+        - name: config
+          configMap:
+            name: heart-disease-config
+            items:
+              - key: config.toml
+                path: config.toml

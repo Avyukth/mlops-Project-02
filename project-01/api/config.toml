@@ -1,0 +1,64 @@
+[app]
+experiment_name = "Heart Disease Classification"
+
+[paths]
+data_dir = "./data/dataset_heart.csv"
+model_dir = "./models"
+
+[train_test_split]
+test_size = 0.2
+random_state = 42
+
+[versions]
+model = "1.0.0"
+data = "1.0.0"
+
+[model_params]
+[model_params.logistic_regression]
+C = 1.0
+penalty = "l2"
+solver = "liblinear"
+max_iter = 1000
+
+[model_params.svm]
+C = 1.0
+kernel = "rbf"
+probability = true
+
+[model_params.knn]
+n_neighbors = 5
+weights = "uniform"
+
+[model_params.mlp]
+hidden_layer_sizes = [100, 50]
+activation = "relu"
+solver = "adam"
+max_iter = 1000
+
+[model_params.random_forest]
+n_estimators = 100
+min_samples_split = 2
+min_samples_leaf = 1
+
+[model_params.extra_trees]
+n_estimators = 100
+min_samples_split = 2
+min_samples_leaf = 1
+
+[model_params.catboost]
+iterations = 100
+depth = 6
+learning_rate = 0.1
+loss_function = "Logloss"
+
+[model_params.lgbm]
+num_leaves = 31
+max_depth = -1
+learning_rate = 0.1
+n_estimators = 100
+
+[model_params.xgboost]
+max_depth = 6
+learning_rate = 0.1
+n_estimators = 100
+objective = "binary:logistic"

@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "heart-disease-prediction-app"
+version = "0.1.0"
+description = "A Streamlit application for heart disease prediction"
+authors = ["Subhrajit Makur <makur.subhrajit@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+streamlit = "^1.2.0"
+pandas = "^1.2.4"
+requests = "^2.25.1"
+Pillow = "^8.2.0"
+six = "^1.16.0"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+pytest-cov = "^2.12.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

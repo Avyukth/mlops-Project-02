@@ -1,0 +1,1998 @@
+./
+├── confusion_matrix.png
+├── heart.ipynb
+├── pyproject.toml
+├── __init__.py
+├── data_summary.csv
+├── data_process.py
+├── .gitignore
+├── .env
+├── train.py
+├── file_tree.txt
+├── main.py
+├── docker/
+│   ├── monitoring-docker.yml
+│   ├── Dockerfile.streamlit
+│   ├── Dockerfile.api
+│   ├── Dockerfile.train
+│   ├── docker-compose.yml
+├── streamlit/
+│   ├── app.py
+│   ├── artifacts/
+│   │   ├── green.webp
+│   │   ├── red.webp
+├── .pytest_cache/
+│   ├── CACHEDIR.TAG
+│   ├── README.md
+│   ├── .gitignore
+│   ├── v/
+│   │   ├── cache/
+│   │   │   ├── nodeids
+│   │   │   ├── lastfailed
+│   │   │   ├── stepwise
+├── config/
+│   ├── config.yaml
+│   ├── model_params.yaml
+├── tests/
+│   ├── test_data_loader.py
+│   ├── __init__.py
+│   ├── test_data_preprocessor.py
+│   ├── test_evaluation.py
+│   ├── test_models.py
+│   ├── test_integration.py
+│   ├── __pycache__/
+│   │   ├── test_evaluation.cpython-312-pytest-8.2.2.pyc
+│   │   ├── test_integration.cpython-312-pytest-8.2.2.pyc
+│   │   ├── test_data_loader.cpython-312-pytest-8.2.2.pyc
+│   │   ├── test_models.cpython-312-pytest-8.2.2.pyc
+│   │   ├── test_data_preprocessor.cpython-312-pytest-8.2.2.pyc
+│   │   ├── __init__.cpython-312.pyc
+├── models/
+│   ├── evidently_report.html
+│   ├── evidently_test_suite.html
+│   ├── preprocessor.joblib
+│   ├── best_model.joblib
+│   ├── feature_preprocessor.joblib
+│   ├── target_preprocessor.joblib
+│   ├── model_comparison.png
+├── __pycache__/
+│   ├── data_process.cpython-312.pyc
+│   ├── train.cpython-312.pyc
+│   ├── __init__.cpython-312.pyc
+├── mlruns/
+│   ├── 1/
+│   │   ├── 13edb36bc2244c08b91aaa5f69f9f424/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── preprocessor/
+│   │   │   │   │   ├── preprocessor.joblib
+│   │   ├── e945bdda3527427a98e14811c8d6ff2e/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── plots/
+│   │   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── c6a90fada1ab4890acdd3b3e12fa69dd/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 95ee9fa89ee04769adb625fb8338a8b6/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   ├── 3b5e012d4836431495a59ccb2a7bdd2b/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── data_summary.csv
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   ├── 80a43e5637fa41dc90d444dc1e839b07/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── plots/
+│   │   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── f747c61ca07f4102be9d5834afaf8ec9/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 07e9ff55941b4240a7c1291cf5655632/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── plots/
+│   │   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── cf8a708d153c417f89975de95331681d/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── plots/
+│   │   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── ebd933fcebad4fd09dc45393f44bf176/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   ├── 6cf12a9b32484b768b47923a2a7df18b/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLPModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNNModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── VotingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── StackingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── preprocessor/
+│   │   │   │   │   ├── preprocessor.joblib
+│   │   │   │   ├── RandomForestModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTreesModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 99449a9ead20422e818186e70f2e2fbd/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   ├── b05173508f2f4ef6a08fff32851c6319/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLPModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNNModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── VotingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── StackingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForestModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTreesModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 167c06253cd9430b810d5ca3a4cffdfc/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   ├── b0846c32e8a14dc3aca6356e6d73e2cf/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── d15b749e5dfe4ac790bbd25dbc7a3cbb/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── preprocessors/
+│   │   │   │   │   ├── feature_preprocessor.joblib
+│   │   │   │   │   ├── target_preprocessor.joblib
+│   │   │   │   ├── XGBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLPModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNNModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── VotingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── StackingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForestModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTreesModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── e0bb54eb33e74e059300fbc0eb82f0f9/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   ├── 55fe78bbc7cd4ee3a456444dbbe419eb/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   ├── 462c123435a14b268481afd82af39b69/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   ├── 5cef25be5bbc429fb6df98495956b1d4/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLPModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNNModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── VotingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── StackingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForestModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTreesModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 3d0abf8d38fd4bf1866692ec7eefd6ee/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── preprocessors/
+│   │   │   │   │   ├── feature_preprocessor.joblib
+│   │   │   │   │   ├── target_preprocessor.joblib
+│   │   │   │   ├── XGBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLPModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNNModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── VotingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVMModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── StackingEnsemble/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoostModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForestModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTreesModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 0260052ecbdb4b66a6fe8769ce449252/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── plots/
+│   │   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── d89cf6ec741f4aecbbadf411321333b8/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   ├── 35bd890313c64f8586398351b64c2a81/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   ├── 68736e79a86e44fcbabdcdf6bd023f39/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── evidently_reports/
+│   │   │   │   │   ├── evidently_report.html
+│   │   │   │   │   ├── evidently_test_suite.html
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── plots/
+│   │   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 7367c3aae0a446b09f4f1dc36c3d7c5b/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── preprocessor/
+│   │   │   │   │   ├── preprocessor.joblib
+│   │   ├── 405a83d18d37424d859e3e5712483522/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── best_model/
+│   │   │   │   │   ├── best_model.joblib
+│   │   │   │   ├── preprocessor/
+│   │   │   │   │   ├── preprocessor.joblib
+│   │   ├── 3b91d0e7579c40bd89e3bd8796b06bd5/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 3f17ca1fc93b4413a158dbcf6eca1236/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   ├── 299a9eb7f1884f6ab29379cdb411cb09/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── confusion_matrix.png
+│   │   │   │   ├── model_comparison.png
+│   │   │   │   ├── Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── LGBM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── KNN/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── correlation_matrix.html/
+│   │   │   │   │   ├── correlation_matrix.html
+│   │   │   │   ├── data_summary.json/
+│   │   │   │   │   ├── data_summary.json
+│   │   │   │   ├── Ensemble_Hard/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Stacking_Logistic/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── RandomForest/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── feature_statistics.json/
+│   │   │   │   │   ├── feature_statistics.json
+│   │   │   │   ├── XGB/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── SVM/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── ExtraTrees/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── Ensemble_Soft/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── CatBoost/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   │   ├── MLP/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   ├── 767399052198203445/
+│   │   ├── meta.yaml
+│   ├── .trash/
+│   ├── 188646054961983644/
+│   │   ├── meta.yaml
+│   │   ├── 4e0b727ff32547dc99089b31af02bca2/
+│   │   │   ├── meta.yaml
+│   │   │   ├── metrics/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   ├── tags/
+│   │   │   │   ├── mlflow.user
+│   │   │   │   ├── mlflow.runName
+│   │   │   │   ├── mlflow.source.name
+│   │   │   │   ├── mlflow.log-model.history
+│   │   │   │   ├── mlflow.source.type
+│   │   │   ├── params/
+│   │   ├── bececfd68c374b71b2b8c8e58be0029c/
+│   │   │   ├── meta.yaml
+│   │   │   ├── metrics/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   ├── tags/
+│   │   │   │   ├── mlflow.user
+│   │   │   │   ├── mlflow.runName
+│   │   │   │   ├── mlflow.source.name
+│   │   │   │   ├── mlflow.log-model.history
+│   │   │   │   ├── mlflow.source.type
+│   │   │   ├── params/
+│   │   ├── 34f0a4e5fd784013b911aa06a44ade71/
+│   │   │   ├── meta.yaml
+│   │   │   ├── metrics/
+│   │   │   ├── artifacts/
+│   │   │   │   ├── LogisticRegressionModel/
+│   │   │   │   │   ├── python_env.yaml
+│   │   │   │   │   ├── requirements.txt
+│   │   │   │   │   ├── MLmodel
+│   │   │   │   │   ├── model.pkl
+│   │   │   │   │   ├── conda.yaml
+│   │   │   ├── tags/
+│   │   │   │   ├── mlflow.user
+│   │   │   │   ├── mlflow.runName
+│   │   │   │   ├── mlflow.source.name
+│   │   │   │   ├── mlflow.log-model.history
+│   │   │   │   ├── mlflow.source.type
+│   │   │   ├── params/
+├── api/
+│   ├── models.py
+│   ├── main.py
+│   ├── __pycache__/
+│   │   ├── main.cpython-312.pyc
+├── .vscode/
+│   ├── settings.json
+├── data/
+│   ├── dataset_heart.csv
+│   ├── mlflow.db
+├── catboost_info/
+│   ├── learn_error.tsv
+│   ├── time_left.tsv
+│   ├── catboost_training.json
+│   ├── learn/
+│   │   ├── events.out.tfevents
+│   ├── tmp/
+├── src/
+│   ├── config.py
+│   ├── __init__.py
+│   ├── ensemble/
+│   │   ├── __init__.py
+│   │   ├── voting.py
+│   │   ├── stacking.py
+│   │   ├── __pycache__/
+│   │   │   ├── voting.cpython-312.pyc
+│   │   │   ├── stacking.cpython-312.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   ├── reporting/
+│   │   ├── evidently_reporter.py
+│   │   ├── __pycache__/
+│   │   │   ├── evidently_reporter.cpython-312.pyc
+│   ├── utils/
+│   │   ├── mlflow_utils.py
+│   │   ├── __init__.py
+│   │   ├── s3_utils.py
+│   │   ├── file_utils.py
+│   │   ├── __pycache__/
+│   │   │   ├── mlflow_utils.cpython-312.pyc
+│   │   │   ├── s3_utils.cpython-312.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── file_utils.cpython-312.pyc
+│   ├── models/
+│   │   ├── catboost.py
+│   │   ├── extra_trees.py
+│   │   ├── ensemble_creator.py
+│   │   ├── model_trainer.py
+│   │   ├── __init__.py
+│   │   ├── mlp.py
+│   │   ├── base_model.py
+│   │   ├── logistic_regression.py
+│   │   ├── xgboost.py
+│   │   ├── svm.py
+│   │   ├── random_forest.py
+│   │   ├── lgbm.py
+│   │   ├── knn.py
+│   │   ├── __pycache__/
+│   │   │   ├── lgbm.cpython-312.pyc
+│   │   │   ├── extra_trees.cpython-312.pyc
+│   │   │   ├── model_trainer.cpython-312.pyc
+│   │   │   ├── logistic_regression.cpython-312.pyc
+│   │   │   ├── base_model.cpython-312.pyc
+│   │   │   ├── random_forest.cpython-312.pyc
+│   │   │   ├── mlp.cpython-312.pyc
+│   │   │   ├── catboost.cpython-312.pyc
+│   │   │   ├── svm.cpython-312.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── ensemble_creator.cpython-312.pyc
+│   │   │   ├── xgboost.cpython-312.pyc
+│   │   │   ├── knn.cpython-312.pyc
+│   ├── __pycache__/
+│   │   ├── config.cpython-312.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   ├── evaluation/
+│   │   ├── metrics.py
+│   │   ├── __init__.py
+│   │   ├── visualizations.py
+│   │   ├── evaluator.py
+│   │   ├── __pycache__/
+│   │   │   ├── evaluator.cpython-312.pyc
+│   │   │   ├── visualizations.cpython-312.pyc
+│   │   │   ├── metrics.cpython-312.pyc
+│   │   │   ├── __init__.cpython-312.pyc
+│   ├── data/
+│   │   ├── data_loader.py
+│   │   ├── __init__.py
+│   │   ├── feature_preprocessor.py
+│   │   ├── target_preprocessor.py
+│   │   ├── data_manager.py
+│   │   ├── data_splitter.py
+│   │   ├── data_preprocessor.py
+│   │   ├── __pycache__/
+│   │   │   ├── data_loader.cpython-312.pyc
+│   │   │   ├── target_preprocessor.cpython-312.pyc
+│   │   │   ├── data_splitter.cpython-312.pyc
+│   │   │   ├── feature_preprocessor.cpython-312.pyc
+│   │   │   ├── data_manager.cpython-312.pyc
+│   │   │   ├── data_preprocessor.cpython-312.pyc
+│   │   │   ├── __init__.cpython-312.pyc

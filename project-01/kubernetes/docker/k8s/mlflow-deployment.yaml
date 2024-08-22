@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  namespace: heart-disease-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+        - name: mlflow
+          image: localhost/heart-disease-mlflow:latest
+          ports:
+            - containerPort: 6060
+          env:
+            - name: MLFLOW_TRACKING_URI
+              value: sqlite:////mlflow/mlflow_data/mlflow.db
+            - name: MLFLOW_DEFAULT_ARTIFACT_ROOT
+              value: s3://$(S3_BUCKET_NAME)
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: secret-access-key
+            - name: MLFLOW_S3_ENDPOINT_URL
+              value: http://minio:9000
+          volumeMounts:
+            - name: mlflow-artifacts
+              mountPath: /mlflow/mlruns
+            - name: mlflow-data
+              mountPath: /mlflow/mlflow_data
+      volumes:
+        - name: mlflow-artifacts
+          persistentVolumeClaim:
+            claimName: mlflow-artifacts-pvc
+        - name: mlflow-data
+          persistentVolumeClaim:
+            claimName: mlflow-data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow
+  namespace: heart-disease-system
+spec:
+  selector:
+    app: mlflow
+  ports:
+    - protocol: TCP
+      port: 6060
+      targetPort: 6060
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mlflow-artifacts-pvc
+  namespace: heart-disease-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mlflow-data-pvc
+  namespace: heart-disease-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

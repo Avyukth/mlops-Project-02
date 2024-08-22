@@ -1,0 +1,22 @@
+FROM ghcr.io/mlflow/mlflow:latest
+
+USER root
+
+RUN apt-get update && apt-get install -y curl sqlite3 && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /mlflow/mlflow_data /mlflow/mlruns && \
+    chown -R nobody:nogroup /mlflow
+
+WORKDIR /mlflow
+
+COPY mlflow.sh /mlflow.sh
+RUN chmod +x /mlflow.sh
+
+USER nobody
+
+ENTRYPOINT ["/mlflow.sh"]
+
+EXPOSE 6060
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=5 \
+    CMD curl -f http://localhost:6060/health || exit 1
