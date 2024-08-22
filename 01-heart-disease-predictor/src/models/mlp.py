@@ -23,6 +23,10 @@ class MLPModel(BaseModel):
         return self.model.get_params()
 
     def _create_torch_model(self):
+        if not hasattr(self.model, 'coefs_') or len(self.model.coefs_) == 0:
+            print("Warning: MLPClassifier model is not fitted yet. Skipping torch model creation.")
+            return
+
         class TorchMLP(nn.Module):
             def __init__(self, input_size, hidden_layers, output_size):
                 super(TorchMLP, self).__init__()
@@ -45,12 +49,15 @@ class MLPModel(BaseModel):
         # Transfer learned parameters
         for i, layer in enumerate(self.torch_model.layers):
             if isinstance(layer, nn.Linear):
-                layer.weight.data = torch.FloatTensor(self.model.coefs_[i].T)
-                layer.bias.data = torch.FloatTensor(self.model.intercepts_[i])
+                if i < len(self.model.coefs_):
+                    layer.weight.data = torch.FloatTensor(self.model.coefs_[i].T)
+                    layer.bias.data = torch.FloatTensor(self.model.intercepts_[i])
+                else:
+                    print(f"Warning: Mismatch in layer count. Skipping weight transfer for layer {i}")
 
     def to_onnx(self, file_path: str):
         if self.torch_model is None:
-            raise ValueError("Model must be fitted before converting to ONNX")
+            raise ValueError("Torch model has not been created. Ensure the model is fitted before converting to ONNX")
 
         dummy_input = torch.randn(1, self.input_size)
         torch.onnx.export(self.torch_model, dummy_input, file_path, 
