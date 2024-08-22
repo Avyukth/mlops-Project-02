@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 import numpy as np
+import torch
 
 class BaseModel(ABC):
     @abstractmethod
@@ -13,4 +14,11 @@ class BaseModel(ABC):
 
     @abstractmethod
     def get_params(self) -> dict:
+        pass
+
+    @abstractmethod
+    def to_onnx(self, file_path: str) -> None:
+        pass
+
+    def _create_torch_model(self):
         pass

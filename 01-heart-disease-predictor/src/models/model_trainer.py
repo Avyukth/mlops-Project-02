@@ -32,3 +32,9 @@ class ModelTrainer:
             model.fit(x_train, y_train)
 
         return models
+
+    def export_models_to_onnx(self, models: Dict[str, BaseModel], output_dir: str):
+        for name, model in models.items():
+            onnx_file_path = f"{output_dir}/{name.lower()}_model.onnx"
+            model.to_onnx(onnx_file_path)
+            print(f"Exported {name} model to ONNX format: {onnx_file_path}")
