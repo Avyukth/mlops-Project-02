@@ -14,3 +14,4 @@ evidently
 cloudpickle
 skl2onnx
 onnxruntime
+torchvision
