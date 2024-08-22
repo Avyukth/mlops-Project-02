@@ -64,7 +64,7 @@ To run the heart disease prediction:
 ```
 ---
 
-## Data Processing
+<!-- ## Data Processing
 
 The `data_process.py` script handles the following tasks:
 
@@ -106,7 +106,7 @@ To view the MLflow UI, run:
 mlflow ui
 ```
 ---
-Then open a browser and navigate to `http://localhost:5000`.
+Then open a browser and navigate to `http://localhost:5000`. -->
 
 ## Contributing
 
