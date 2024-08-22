@@ -1,13 +1,13 @@
 from .base_model import BaseModel
-from lightgbm import LGBMClassifier
+from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import numpy as np
 import torch
 import torch.nn as nn
 
-class LGBMModel(BaseModel):
+class KNNModel(BaseModel):
     def __init__(self, **kwargs):
-        self.model = LGBMClassifier(**kwargs)
+        self.model = KNeighborsClassifier(**kwargs)
         self.torch_model = None
         self.input_size = None
 
@@ -23,17 +23,20 @@ class LGBMModel(BaseModel):
         return self.model.get_params()
 
     def _create_torch_model(self):
-        class TorchLGBM(nn.Module):
-            def __init__(self, input_size, n_trees):
-                super(TorchLGBM, self).__init__()
-                self.trees = nn.ModuleList([nn.Linear(input_size, 1) for _ in range(n_trees)])
+        class TorchKNN(nn.Module):
+            def __init__(self, X_train, y_train, k):
+                super(TorchKNN, self).__init__()
+                self.X_train = torch.FloatTensor(X_train)
+                self.y_train = torch.LongTensor(y_train)
+                self.k = k
 
             def forward(self, x):
-                return torch.sum(torch.stack([tree(x) for tree in self.trees]), dim=0)
+                distances = torch.cdist(x, self.X_train)
+                _, indices = torch.topk(distances, self.k, largest=False)
+                nearest_labels = torch.gather(self.y_train.unsqueeze(0).expand(x.size(0), -1), 1, indices)
+                return torch.mode(nearest_labels, dim=1).values
 
-        n_trees = self.model.n_estimators_
-        self.torch_model = TorchLGBM(self.input_size, n_trees)
-        # Transfer learned parameters (this is a placeholder and needs to be implemented properly)
+        self.torch_model = TorchKNN(self.model._fit_X, self.model._y, self.model.n_neighbors)
 
     def to_onnx(self, file_path: str):
         if self.torch_model is None:
