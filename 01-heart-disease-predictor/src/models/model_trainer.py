@@ -1,14 +1,14 @@
 from typing import Dict
-from src.models.catboost import CatBoostModel
-from src.models.extra_trees import ExtraTreesModel
-from src.models.knn import KNNModel
-from src.models.lgbm import LGBMModel
-from src.models.logistic_regression import LogisticRegressionModel
-from src.models.mlp import MLPModel
-from src.models.random_forest import RandomForestModel
-from src.models.svm import SVMModel
-from src.models.xgboost import XGBoostModel
-from src.models.base_model import BaseModel
+from .base_model import BaseModel
+from .catboost import CatBoostModel
+from .extra_trees import ExtraTreesModel
+from .knn import KNNModel
+from .lgbm import LGBMModel
+from .logistic_regression import LogisticRegressionModel
+from .mlp import MLPModel
+from .random_forest import RandomForestModel
+from .svm import SVMModel
+from .xgboost import XGBoostModel
 
 class ModelTrainer:
     def __init__(self, config):
@@ -33,8 +33,18 @@ class ModelTrainer:
 
         return models
 
-    def export_models_to_onnx(self, models: Dict[str, BaseModel], output_dir: str):
+    def save_models(self, models: Dict[str, BaseModel], output_dir: str):
         for name, model in models.items():
-            onnx_file_path = f"{output_dir}/{name.lower()}_model.onnx"
-            model.to_onnx(onnx_file_path)
-            print(f"Exported {name} model to ONNX format: {onnx_file_path}")
+            file_path = f"{output_dir}/{name}_model.pkl"
+            model.save_model(file_path)
+            print(f"Saved {name} model to {file_path}")
+
+    def load_models(self, model_paths: Dict[str, str]) -> Dict[str, BaseModel]:
+        models = {}
+        for name, path in model_paths.items():
+            model_class = globals()[f"{name}Model"]
+            model = model_class()
+            model.load_model(path)
+            models[name] = model
+            print(f"Loaded {name} model from {path}")
+        return models

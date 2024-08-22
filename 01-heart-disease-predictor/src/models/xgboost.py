@@ -2,46 +2,36 @@ from .base_model import BaseModel
 from xgboost import XGBClassifier
 import pandas as pd
 import numpy as np
-import torch
-import torch.nn as nn
+import pickle
 
 class XGBoostModel(BaseModel):
     def __init__(self, **kwargs):
+        super().__init__()
         self.model = XGBClassifier(**kwargs)
-        self.torch_model = None
-        self.input_size = None
 
     def fit(self, X: pd.DataFrame, y: pd.Series) -> None:
-        self.model.fit(X, y)
+        y_encoded = self.encode_target(y)
+        self.model.fit(X, y_encoded)
         self.input_size = X.shape[1]
-        self._create_torch_model()
 
     def predict(self, X: pd.DataFrame) -> np.ndarray:
-        return self.model.predict(X)
+        y_pred_encoded = self.model.predict(X)
+        return self.decode_predictions(y_pred_encoded)
 
     def get_params(self) -> dict:
         return self.model.get_params()
 
-    def _create_torch_model(self):
-        class TorchXGBoost(nn.Module):
-            def __init__(self, input_size, n_trees):
-                super(TorchXGBoost, self).__init__()
-                self.trees = nn.ModuleList([nn.Linear(input_size, 1) for _ in range(n_trees)])
+    def save_model(self, file_path: str) -> None:
+        with open(file_path, 'wb') as f:
+            pickle.dump({
+                'model': self.model,
+                'label_encoder': self.label_encoder,
+                'input_size': self.input_size
+            }, f)
 
-            def forward(self, x):
-                return torch.sum(torch.stack([tree(x) for tree in self.trees]), dim=0)
-
-        n_trees = self.model.n_estimators
-        self.torch_model = TorchXGBoost(self.input_size, n_trees)
-        # Transfer learned parameters (this is a placeholder and needs to be implemented properly)
-        # In practice, you would need to convert the tree structure to a series of linear operations
-
-    def to_onnx(self, file_path: str):
-        if self.torch_model is None:
-            raise ValueError("Model must be fitted before converting to ONNX")
-
-        dummy_input = torch.randn(1, self.input_size)
-        torch.onnx.export(self.torch_model, dummy_input, file_path, 
-                          input_names=['input'], output_names=['output'],
-                          dynamic_axes={'input': {0: 'batch_size'},
-                                        'output': {0: 'batch_size'}})
+    def load_model(self, file_path: str) -> None:
+        with open(file_path, 'rb') as f:
+            data = pickle.load(f)
+        self.model = data['model']
+        self.label_encoder = data['label_encoder']
+        self.input_size = data['input_size']

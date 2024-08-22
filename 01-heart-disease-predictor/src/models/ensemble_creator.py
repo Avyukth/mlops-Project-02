@@ -1,20 +1,20 @@
 from typing import Dict, List
 import pandas as pd
-import torch
-import torch.nn as nn
-from src.models.base_model import BaseModel
-from src.ensemble.voting import VotingEnsemble
-from src.ensemble.stacking import StackingEnsemble
+from .base_model import BaseModel
+from sklearn.ensemble import VotingClassifier, StackingClassifier
+import pickle
 
 class EnsembleCreator:
     def __init__(self, config):
         self.config = config
 
     def create_ensemble_models(self, models: Dict[str, BaseModel], x_train: pd.DataFrame, y_train: pd.Series) -> Dict[str, BaseModel]:
-        voting_soft = VotingEnsemble(list(models.items()), voting='soft')
-        voting_hard = VotingEnsemble(list(models.items()), voting='hard')
-        stacking_logistic = StackingEnsemble(list(models.values()), meta_model=models['Logistic'])
-        stacking_lgbm = StackingEnsemble(list(models.values()), meta_model=models['LGBM'])
+        estimators = [(name, model.model) for name, model in models.items()]
+        
+        voting_soft = VotingClassifier(estimators=estimators, voting='soft')
+        voting_hard = VotingClassifier(estimators=estimators, voting='hard')
+        stacking_logistic = StackingClassifier(estimators=estimators, final_estimator=models['Logistic'].model)
+        stacking_lgbm = StackingClassifier(estimators=estimators, final_estimator=models['LGBM'].model)
 
         ensemble_models = {
             "Ensemble_Soft": voting_soft,
@@ -28,28 +28,43 @@ class EnsembleCreator:
             print(f"Fitting {name}...")
             model.fit(x_train, y_train)
 
-        return ensemble_models
-
-    def export_ensemble_models_to_onnx(self, ensemble_models: Dict[str, BaseModel], output_dir: str):
+        # Wrap ensemble models in BaseModel
+        wrapped_models = {}
         for name, model in ensemble_models.items():
-            onnx_file_path = f"{output_dir}/{name.lower()}_model.onnx"
-            self._export_ensemble_to_onnx(model, onnx_file_path, x_train.shape[1])
-            print(f"Exported {name} ensemble model to ONNX format: {onnx_file_path}")
+            wrapped_model = BaseModelWrapper(model)
+            wrapped_model.fit(x_train, y_train)
+            wrapped_models[name] = wrapped_model
 
-    def _export_ensemble_to_onnx(self, ensemble_model, file_path: str, input_size: int):
-        class TorchEnsemble(nn.Module):
-            def __init__(self, ensemble_model):
-                super(TorchEnsemble, self).__init__()
-                self.ensemble_model = ensemble_model
+        return wrapped_models
 
-            def forward(self, x):
-                # This is a placeholder implementation and needs to be adapted
-                # based on the specific ensemble model type (Voting or Stacking)
-                return torch.tensor(self.ensemble_model.predict(x.numpy()))
+class BaseModelWrapper(BaseModel):
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
 
-        torch_ensemble = TorchEnsemble(ensemble_model)
-        dummy_input = torch.randn(1, input_size)
-        torch.onnx.export(torch_ensemble, dummy_input, file_path, 
-                          input_names=['input'], output_names=['output'],
-                          dynamic_axes={'input': {0: 'batch_size'},
-                                        'output': {0: 'batch_size'}})
+    def fit(self, X: pd.DataFrame, y: pd.Series) -> None:
+        y_encoded = self.encode_target(y)
+        self.model.fit(X, y_encoded)
+        self.input_size = X.shape[1]
+
+    def predict(self, X: pd.DataFrame) -> np.ndarray:
+        y_pred_encoded = self.model.predict(X)
+        return self.decode_predictions(y_pred_encoded)
+
+    def get_params(self) -> dict:
+        return self.model.get_params()
+
+    def save_model(self, file_path: str) -> None:
+        with open(file_path, 'wb') as f:
+            pickle.dump({
+                'model': self.model,
+                'label_encoder': self.label_encoder,
+                'input_size': self.input_size
+            }, f)
+
+    def load_model(self, file_path: str) -> None:
+        with open(file_path, 'rb') as f:
+            data = pickle.load(f)
+        self.model = data['model']
+        self.label_encoder = data['label_encoder']
+        self.input_size = data['input_size']
